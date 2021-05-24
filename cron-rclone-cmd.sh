@@ -4,4 +4,4 @@
 # with the configured remote "target" and destination. This is expected to run
 # at regular intervals driven by cron (typically daily at 2AM).
 
-rclone sync ${LOCAL} target:"${REMOTE}" --progress
+rclone sync /data target:"${REMOTE}" --progress

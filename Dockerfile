@@ -4,7 +4,12 @@ FROM ${from}
 # A cron-driven rclone that syncs a dirctory in the container
 # with a remote (S3) service.
 
-# An empty rclon.conf is installed (later).
+# The local path that will be synchronised with the target.
+# The target (destination) wil be modifed, the local directory will not.
+# Used in 'cron-rclone-cmd.sh'.
+# Mount your data at '/data'.
+WORKDIR /data
+
 # The container is expected to run as root
 # and the user is expected to replace one or more
 # of the following S3 "target" environment variables
@@ -19,12 +24,9 @@ ENV RCLONE_CONFIG_TARGET_ENDPOINT SetMe
 ENV RCLONE_CONFIG_TARGET_ENV_AUTH false
 ENV RCLONE_CONFIG_TARGET_ACL public-read
 
-# Local and remote paths,
-# used in 'cron-rclone-cmd.sh'.
-# The local directory is syncrhonised with the remote path.
-WORKDIR /data
-ENV LOCAL /data
-ENV REMOTE discourse-backup/production
+# The remote path available in the above target,
+# where local data will be syncronised.
+ENV REMOTE SetMe
 
 # An empty rclon.conf (to avoid warnings about it being absent)
 COPY rclone.conf /config/rclone/rclone.conf
