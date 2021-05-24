@@ -17,7 +17,7 @@ ENV DATA_PATH discourse/public/backups/default
 # and the user is expected to replace one or more
 # of the following S3 "target" environment variables
 # to satisfy their remote rclone "target" service,
-# i.e. at least all those wits SetMe values!
+# i.e. at least all those with the value 'SetMe'
 
 ENV RCLONE_CONFIG_TARGET_TYPE s3
 ENV RCLONE_CONFIG_TARGET_PROVIDER SetMe
@@ -31,12 +31,12 @@ ENV RCLONE_CONFIG_TARGET_ACL public-read
 # where local data will be syncronised.
 ENV REMOTE_PATH SetMe
 
-# An empty rclon.conf (to avoid warnings about it being absent)
+# An empty rclone.conf (to avoid warnings about it being absent)
 COPY rclone.conf /config/rclone/rclone.conf
-# The rclone script - synchronises SOURCE to target:DESTINATION
+# The rclone script - synchronises /data/DATA_PATH to target:REMOTE_PATH
 COPY cron-rclone-cmd.sh /usr/local/bin/cron-rclone-cmd.sh
 RUN chmod 0755 /usr/local/bin/cron-rclone-cmd.sh
-# A default crontab (2AM executiuon of 'cron-rclone-cmd.sh')
+# A default crontab (that executes 'cron-rclone-cmd.sh')
 COPY root-crontab /etc/crontabs/root
 
 # The entrypoint script
