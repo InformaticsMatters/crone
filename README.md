@@ -20,6 +20,27 @@ against an environment-defined remote S3 target.
 
 See the Dockerfile for environment configuration.
 
+## Target (remote) path
+The target (remote) path is expected to exist in the S3 service.
+Assuming you have valid environment variables, you can create the directory
+with the `mkdir` rclone command in the container: -
+
+    # rclone mkdir target:discourse-backups/development
+
+You can list objects in the path with `ls`: -
+
+    # rclone ls target:discourse-backups/development
+
+You can get a list of all commands with: -
+
+    # rclone
+
+## Changing the synchronisation time (Kubernetes)
+Synchronisation is controlled by the root crontab file, written to
+`/etc/crontabs/root` via the Dockerfile. Our build invokes the backup at
+02:03 every morning. If you want to change this you could use a Kubernetes
+**ConfigMap** and replace the root crontab with your own file.
+
 ---
 
 [rclone]: https://rclone.org
