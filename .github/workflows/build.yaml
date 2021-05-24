@@ -25,6 +25,9 @@ on:
   pull_request:
     branches:
     - 'main'
+  schedule:
+  # Build every Wednesday at 7:15pm
+  - cron: '15 19 * * 3'
 
 jobs:
   build:
