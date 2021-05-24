@@ -4,11 +4,14 @@ FROM ${from}
 # A cron-driven rclone that syncs a dirctory in the container
 # with a remote (S3) service.
 
-# The local path that will be synchronised with the target.
-# The target (destination) wil be modifed, the local directory will not.
+# The local directory that will be synchronised with the target.
+# The target (destination) will be modifed, the local directory will not.
 # Used in 'cron-rclone-cmd.sh'.
-# Mount your data at '/data'.
+# Mount your data at '/data' and then provide any sub-directory
+# using DATA_PATH without a leading '/'.
+# i.e. to syncronise '/data/a/b' set DATA_PATH to 'a/b'
 WORKDIR /data
+ENV DATA_PATH discourse/public/backups/default
 
 # The container is expected to run as root
 # and the user is expected to replace one or more
@@ -26,7 +29,7 @@ ENV RCLONE_CONFIG_TARGET_ACL public-read
 
 # The remote path available in the above target,
 # where local data will be syncronised.
-ENV REMOTE SetMe
+ENV REMOTE_PATH SetMe
 
 # An empty rclon.conf (to avoid warnings about it being absent)
 COPY rclone.conf /config/rclone/rclone.conf
