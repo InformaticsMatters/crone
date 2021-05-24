@@ -39,5 +39,10 @@ RUN chmod 0755 /usr/local/bin/cron-rclone-cmd.sh
 # A default crontab (2AM executiuon of 'cron-rclone-cmd.sh')
 COPY root-crontab /etc/crontabs/root
 
+# The entrypoint script
+WORKDIR /
+COPY docker-entrypoint.sh /
+RUN chmod 0755 /docker-entrypoint.sh
+
 ENTRYPOINT []
-CMD ['crond', '-l 2', '-f']
+CMD ./docker-entrypoint.sh

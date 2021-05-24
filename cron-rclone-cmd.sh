@@ -9,4 +9,6 @@
 LOCAL_PATH=/data
 if [ -n "${DATA_PATH}" ]; then LOCAL_PATH=/data/$DATA_PATH; fi
 
+echo "+> $(date) Starting 'rclone sync'..."
 rclone sync "${LOCAL_PATH}" target:"${REMOTE_PATH}" --progress
+echo "+> $(date) Finished 'rclone sync'"
