@@ -1,5 +1,5 @@
 # crone
-**CR**on-rc**ONE**
+**CR**on-rcl**ONE**
 
 [![build](https://github.com/informaticsmatters/crone/actions/workflows/build.yaml/badge.svg)](https://github.com/informaticsmatters/crone/actions/workflows/build.yaml)
 [![build latest](https://github.com/informaticsmatters/crone/actions/workflows/build-latest.yaml/badge.svg)](https://github.com/informaticsmatters/crone/actions/workflows/build-latest.yaml)
